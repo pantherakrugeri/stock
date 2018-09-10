@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: Inventory API
+  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
+  version: 0.1.9
+servers:
+  - url: localhost:8080
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+paths:
+  /getStock:
+    get:
+      summary: Returns a list of stock from inventory.
+      responses:
+        '200':    # status code
+          description: a list of stock should be returned from inventory
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /addStock:
+    post:
+      summary: Add stock to inventory.
+      responses:
+        '200':    # status code
+          description: true should be returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+  /updateStock/stockId/{stockId}/:
+    put:
+      summary: Update stock by id.
+      responses:
+        '200':    # status code
+          description: true should be returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      parameters:
+        - in: path
+          name: stockId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the stock to get
+  /deleteStockById/stockId/{stockId}:
+    delete:
+      summary: Update stock by id.
+      responses:
+        '200':    # status code
+          description: true should be returned
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+      parameters:
+        - in: path
+          name: stockId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the stock to delete

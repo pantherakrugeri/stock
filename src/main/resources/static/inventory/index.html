@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html ng-app="inventoryStockApp">
+<head>
+    <link rel="styleSheet" href="/node_modules/angular-ui-grid/ui-grid.min.css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="app.js"></script>
+    <script src="/node_modules/angular-ui-grid/ui-grid.min.js"></script>
+    <style>
+        body {
+            background-color: #2a2627; margin: 20px;
+        }
+    </style>
+</head>
+
+
+
+<body>
+    <div ng-controller="InventoryStockController as inv">
+        <div ui-grid="inv.gridOptions" ui-grid-edit class="grid"></div>
+    </div>
+</body>
+
+</html>

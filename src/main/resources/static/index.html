@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<title>Inventory</title>
+<head>
+    <script src="/node_modules/angular/angular.js"></script>
+</head>
+<style>
+    body {
+        background-color: #2a2627; margin: 20px;
+    }
+    h1, form, a {
+        color: white;
+    }
+
+    input {
+        margin: 10px;
+    }
+</style>
+
+<body>
+    <a href="/inventory/index.html">See Stock</a>
+    <h1>Inventory</h1>
+
+    <form action="addStock" method="post">
+        <!--Stock Id: <br><input name="stockId" type="text"><br>-->
+        Stock Name: <br><input name="stockName" type="text"><br>
+        Stock Code: <br><input name="stockCode" type="text"><br>
+        Stock Cost: <br><input name="stockCost" type="text"><br>
+        Stock Qty: <br><input name="stockQty" type="text"><br>
+        <input name="submit" type="submit">
+    </form>
+</body>
+</html>
