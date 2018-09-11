@@ -2,11 +2,13 @@ package inventory.stock.controller;
 
 import inventory.stock.dao.StockDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import inventory.stock.model.StockItem;
+import java.util.Optional;
 
-@Controller
+
+@RestController
 public class StockController {
 
     @Autowired
@@ -17,30 +19,43 @@ public class StockController {
         return "index.html";
     }
 
-    @RequestMapping("/getStock")
+    @GetMapping("/getStock")
     @ResponseBody
     public Iterable<StockItem> getAllStock() {
         return stockDao.findAll();
     }
 
-    @RequestMapping(value="/getStockById/stockId/{stockId}", method = RequestMethod.GET)
-    public @ResponseBody Iterable<StockItem> getStockById(@PathVariable("stockId") int stockId) {
-        return stockDao.findById(stockId);
+    @GetMapping("/getStockById/stockId/{stockId}")
+    public StockItem getStockById(@PathVariable int stockId) {
+        Optional<StockItem> stockItemOptional = stockDao.findById(stockId);
+
+        if (!stockItemOptional.isPresent()) {
+
+        }
+        return stockItemOptional.get();
     }
 
-    @RequestMapping(value = "/addStock", method = RequestMethod.POST)
-    @ResponseBody
-    public String addStock(StockItem stock) {
+    @PostMapping("/addStock")
+    public void addStock( StockItem stock) {
         stockDao.save(stock);
-        return home();
     }
 
-//    @RequestMapping(value="/updateStockById/stockId/{stockId}", method = RequestMethod.GET) // need to change this to PUT
-//    public @ResponseBody Iterable<StockItem> updateStockById(@PathVariable("stockId") int stockId) {
-//        return stockDao.updateById(stockId);
-//    }
+    @PutMapping("/updateStockById/{stockId}")
+    StockItem updateStock(@RequestBody StockItem stockItem, @PathVariable int stockId) {
 
-    @RequestMapping(value="/deleteStockById/stockId/{stockId}", method = RequestMethod.GET) // need to change this to DELETE
+        return stockDao.findById(stockId)
+                .map(sItem -> {
+                    stockItem.setStockName(stockItem.getStockName());
+                    stockItem.setStockCode(stockItem.getStockCode());
+                    return stockDao.save(sItem);
+                })
+                .orElseGet(() -> {
+                    stockItem.setStockId(stockId);
+                    return stockDao.save(stockItem);
+                });
+    }
+
+    @DeleteMapping("/deleteStockById/stockId/{stockId}")
     public @ResponseBody Iterable<StockItem> deleteStockById(@PathVariable("stockId") int stockId) {
         return stockDao.deleteById(stockId);
     }

@@ -5,10 +5,12 @@
     <script src="/node_modules/angular/angular.js"></script>
 </head>
 <style>
+
+    @import url('https://unpkg.com/bootstrap@3.3.7/dist/css/bootstrap.min.css');
     body {
         background-color: #2a2627; margin: 20px;
     }
-    h1, form, a {
+    h1, label, a {
         color: white;
     }
 
@@ -16,18 +18,16 @@
         margin: 10px;
     }
 </style>
-
 <body>
     <a href="/inventory/index.html">See Stock</a>
     <h1>Inventory</h1>
 
     <form action="addStock" method="post">
         <!--Stock Id: <br><input name="stockId" type="text"><br>-->
-        Stock Name: <br><input name="stockName" type="text"><br>
-        Stock Code: <br><input name="stockCode" type="text"><br>
-        Stock Cost: <br><input name="stockCost" type="text"><br>
-        Stock Qty: <br><input name="stockQty" type="text"><br>
+        <label>Stock Name:</label> <br><input name="stockName" type="text"><br>
+        <label>Stock Code:</label> <br><input name="stockCode" type="text"><br>
+        <label>Stock Cost:</label> <br><input name="stockCost" type="text"><br>
+        <label>Stock Qty:</label> <br><input name="stockQty" type="text"><br>
         <input name="submit" type="submit">
     </form>
-</body>
 </html>

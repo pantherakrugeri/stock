@@ -12,7 +12,7 @@ inventoryStockApp.controller('InventoryStockController', function InventoryStock
             { field: 'stockName' },
             { field: 'stockCode' },
             { field: 'stockCost' },
-            { field: 'stockQty' }
+            { field: 'stockQty', type: 'number' }
         ]
     };
 
@@ -21,3 +21,4 @@ inventoryStockApp.controller('InventoryStockController', function InventoryStock
             vm.gridOptions.data = response.data;
         });
 });
+
