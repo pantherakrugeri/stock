@@ -45,7 +45,7 @@ public class StockController {
 
     @PutMapping("/updateStockById/{stockId}")
     @ResponseStatus(HttpStatus.OK)
-    StockItem updateStock(@RequestBody StockItem stockItem, @PathVariable int stockId) {
+    public StockItem updateStock(@RequestBody StockItem stockItem, @PathVariable int stockId) {
 
         return stockDao.findById(stockId)
                 .map(sItem -> {
