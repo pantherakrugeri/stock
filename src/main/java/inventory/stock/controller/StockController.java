@@ -26,6 +26,7 @@ public class StockController {
     }
 
     @GetMapping("/getStockById/stockId/{stockId}")
+    @ResponseBody
     public StockItem getStockById(@PathVariable int stockId) {
         Optional<StockItem> stockItemOptional = stockDao.findById(stockId);
 
