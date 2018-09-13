@@ -3,7 +3,6 @@ package inventory.stock.controller;
 import inventory.stock.dao.StockDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import inventory.stock.model.StockItem;
 import java.util.Optional;
@@ -51,6 +50,8 @@ public class StockController {
                 .map(sItem -> {
                     stockItem.setStockName(stockItem.getStockName());
                     stockItem.setStockCode(stockItem.getStockCode());
+                    stockItem.setStockCost(stockItem.getStockCost());
+                    stockItem.setStockQty(stockItem.getStockQty());
                     return stockDao.save(sItem);
                 })
                 .orElseGet(() -> {
