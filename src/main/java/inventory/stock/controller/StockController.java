@@ -2,6 +2,7 @@ package inventory.stock.controller;
 
 import inventory.stock.dao.StockDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import inventory.stock.model.StockItem;
@@ -36,11 +37,14 @@ public class StockController {
     }
 
     @PostMapping("/addStock")
-    public void addStock( StockItem stock) {
-        stockDao.save(stock);
+    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
+    public StockItem addStock( StockItem stock) {
+       return stockDao.save(stock);
     }
 
     @PutMapping("/updateStockById/{stockId}")
+    @ResponseStatus(HttpStatus.OK)
     StockItem updateStock(@RequestBody StockItem stockItem, @PathVariable int stockId) {
 
         return stockDao.findById(stockId)
@@ -56,7 +60,8 @@ public class StockController {
     }
 
     @DeleteMapping("/deleteStockById/stockId/{stockId}")
-    public @ResponseBody Iterable<StockItem> deleteStockById(@PathVariable("stockId") int stockId) {
-        return stockDao.deleteById(stockId);
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteStockById(@PathVariable("stockId") int stockId) {
+        stockDao.deleteById(stockId);
     }
 }
